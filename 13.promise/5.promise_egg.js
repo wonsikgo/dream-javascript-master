@@ -11,13 +11,21 @@ function fryEgg(egg) {
 }
 
 function getChicken() {
-  return Promise.resolve(`🥦 => 🐓`);
+  // return Promise.resolve(`🥦 => 🐓`);
+  return Promise.reject(new Error("치킨을 가지고 올 수 없음!"));
 }
 
 // fetchEgg('🐔')
 
+// getChicken()
+//   .then((chicken) => {
+//     return fetchEgg(chicken);
+//   })
+//   .then((egg) => fryEgg(egg))
+//   .then((friedEgg) => console.log(friedEgg));
+
 getChicken()
-  .then((chicken) => {
-    return fetchEgg(chicken);
-  })
-  .then((egg) => fryEgg(egg));
+  .catch(() => "🐔")
+  .then(fetchEgg)
+  .then(fryEgg)
+  .then(console.log());
